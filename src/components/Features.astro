@@ -1,0 +1,308 @@
+---
+const features = [
+  {
+    tag: "Prototype",
+    title: "Prototype data views in minutes",
+    description: "Connect your core data sources and instantly generate clean, queryable views. No more waiting for data engineering tickets.",
+    visual: "ui-mockup",
+    reverse: false
+  },
+  {
+    tag: "Integrity",
+    title: "Make great models together",
+    description: "Collaborative model building with instant feedback loops. Track performance metrics and iteration history in one place.",
+    visual: "chart-growth",
+    reverse: true
+  },
+  {
+    tag: "Confidence",
+    title: "Trust models implicitly",
+    description: "Automated drift detection alerts you when data patterns shift, ensuring your deployment remains reliable over time.",
+    visual: "chart-drift",
+    reverse: false
+  },
+  {
+    tag: "Deploy",
+    title: "Deploy securely",
+    description: "Enterprise-grade security wrapper for all your deployments. Role-based access control built-in from day one.",
+    visual: "isometric-cube",
+    reverse: true
+  }
+];
+---
+
+<section id="features" class="features-section">
+  <div class="container">
+    {features.map((feature, index) => (
+      <div class={`feature-row feature-${index}`}>
+        <div class="content-side">
+          <span class="tag">{feature.tag}</span>
+          <h2>{feature.title}</h2>
+          <p>{feature.description}</p>
+          <a href="#" class="learn-more">Learn more <span class="arrow">→</span></a>
+        </div>
+        <div class="visual-side">
+          {feature.visual === 'ui-mockup' && (
+            <div class="visual-card mockup">
+              <div class="mockup-header">
+                <div class="dots"><span></span><span></span><span></span></div>
+              </div>
+              <div class="mockup-body">
+                <div class="skeleton-line w-75"></div>
+                <div class="skeleton-line w-50"></div>
+                <div class="skeleton-grid">
+                  <div class="cell"></div><div class="cell"></div>
+                  <div class="cell"></div><div class="cell"></div>
+                </div>
+              </div>
+            </div>
+          )}
+          
+          {feature.visual === 'chart-growth' && (
+             <div class="visual-card chart">
+               <div class="chart-bars">
+                 <div class="bar" style="height: 40%"></div>
+                 <div class="bar" style="height: 60%"></div>
+                 <div class="bar" style="height: 50%"></div>
+                 <div class="bar" style="height: 80%"></div>
+                 <div class="bar highlight" style="height: 95%"></div>
+               </div>
+               <svg class="trend-line" viewBox="0 0 100 50" preserveAspectRatio="none">
+                 <path d="M0,50 L20,30 L40,35 L60,20 L80,25 L100,5" fill="none" stroke="#6C5DD3" stroke-width="2" />
+               </svg>
+             </div>
+          )}
+
+          {feature.visual === 'chart-drift' && (
+             <div class="visual-card chart">
+                <svg class="drift-line" viewBox="0 0 200 100">
+                  <path d="M0,80 Q50,70 100,80 T200,80" fill="none" stroke="#e0e0e0" stroke-width="2" stroke-dasharray="5,5" />
+                  <path d="M0,80 Q50,70 100,40 T200,20" fill="none" stroke="#FF6B6B" stroke-width="3" />
+                  <circle cx="150" cy="30" r="4" fill="#FF6B6B" class="pulse-dot" />
+                </svg>
+                <div class="alert-box">
+                  <span class="warning-icon">⚠</span> Drift Detected: 12%
+                </div>
+             </div>
+          )}
+
+          {feature.visual === 'isometric-cube' && (
+            <div class="visual-card security">
+              <div class="iso-box">
+                <div class="iso-face top"></div>
+                <div class="iso-face left"></div>
+                <div class="iso-face right"></div>
+                <div class="shield-icon">🛡</div>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Animate rows
+  document.querySelectorAll('.feature-row').forEach((row) => {
+    gsap.from(row.querySelector('.content-side'), {
+      y: 50,
+      opacity: 0,
+      duration: 1,
+      scrollTrigger: {
+        trigger: row,
+        start: "top 80%",
+        toggleActions: "play none none reverse"
+      }
+    });
+
+    gsap.from(row.querySelector('.visual-side'), {
+      scale: 0.9,
+      opacity: 0,
+      duration: 1,
+      delay: 0.2,
+      scrollTrigger: {
+        trigger: row,
+        start: "top 80%",
+        toggleActions: "play none none reverse"
+      }
+    });
+  });
+</script>
+
+<style>
+  .features-section {
+    background: var(--color-bg-light);
+    padding: var(--spacing-section) 0;
+    overflow: hidden;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-lg);
+    display: flex;
+    flex-direction: column;
+    gap: 8rem;
+  }
+
+  .feature-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-xl);
+    align-items: center;
+  }
+
+  /* Removed reverse layout logic to match consistent Webflow design */
+
+  .tag {
+    background: rgba(108, 93, 211, 0.1);
+    color: var(--color-accent);
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    display: inline-block;
+    margin-bottom: var(--spacing-md);
+  }
+
+  h2 {
+    /* Removed Serif */
+    font-size: 2.5rem;
+    color: var(--color-text-dark);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.2;
+    font-weight: 700;
+  }
+
+  p {
+    font-size: 1.125rem;
+    color: #555;
+    margin-bottom: var(--spacing-lg);
+    line-height: 1.7;
+  }
+
+  .learn-more {
+    color: var(--color-accent);
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .arrow {
+    transition: transform 0.2s;
+  }
+
+  .learn-more:hover .arrow {
+    transform: translateX(4px);
+  }
+
+  /* Visual Cards */
+  .visual-card {
+    background: white;
+    border-radius: 1.5rem;
+    padding: 2rem;
+    box-shadow: 0 20px 40px rgba(108, 93, 211, 0.08); /* Purple tint shadow */
+    height: 350px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    border: 1px solid rgba(108,93,211,0.05);
+  }
+
+  /* Mockup Visual */
+  .mockup {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1.5rem;
+  }
+  .mockup-header {
+    width: 100%;
+    margin-bottom: 1.5rem;
+  }
+  .dots { display: flex; gap: 6px; }
+  .dots span { width: 8px; height: 8px; border-radius: 50%; background: #eee; }
+  .dots span:nth-child(1) { background: #FF5F56; }
+  .dots span:nth-child(2) { background: #FFBD2E; }
+  .dots span:nth-child(3) { background: #27C93F; }
+
+  .mockup-body { width: 100%; }
+  .skeleton-line { height: 12px; background: #f0f0f0; border-radius: 6px; margin-bottom: 1rem; }
+  .w-75 { width: 75%; }
+  .w-50 { width: 50%; }
+  .skeleton-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2rem; }
+  .cell { height: 60px; background: #f5f5f5; border-radius: 8px; }
+
+  /* Chart Visual */
+  .chart-bars {
+    display: flex;
+    align-items: flex-end;
+    gap: 15px;
+    height: 150px;
+    width: 200px;
+    margin-bottom: 20px;
+  }
+  .bar { width: 30px; background: #eee; border-radius: 4px 4px 0 0; transition: height 1s; }
+  .bar.highlight { background: var(--color-mint); box-shadow: 0 0 15px rgba(211, 243, 238, 0.5); }
+  
+  .trend-line {
+    position: absolute;
+    width: 80%;
+    height: 100%;
+    top: 0;
+    left: 10%;
+    pointer-events: none;
+    opacity: 0.5;
+  }
+
+  /* Drift Visual */
+  .alert-box {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    background: #FFF0F0;
+    color: #FF6B6B;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: 0 4px 12px rgba(255,107,107,0.1);
+  }
+
+  /* Isometric Visual */
+  .iso-box {
+    width: 100px;
+    height: 100px;
+    position: relative;
+    transform-style: preserve-3d;
+    transform: rotateX(60deg) rotateZ(45deg);
+  }
+  .iso-face { position: absolute; width: 100%; height: 100%; border: 1px solid var(--color-accent); background: rgba(108,93,211,0.1); }
+  .iso-face.top { transform: translateZ(50px); background: rgba(108,93,211,0.2); }
+  .iso-face.left { transform: rotateY(90deg) translateZ(50px); }
+  .iso-face.right { transform: rotateX(90deg) translateZ(50px); }
+  .shield-icon {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%) translateZ(80px) rotateZ(-45deg) rotateX(-60deg);
+    font-size: 3rem;
+  }
+
+  @media (max-width: 900px) {
+    .feature-row { grid-template-columns: 1fr; gap: var(--spacing-lg); }
+    .feature-row.reverse .content-side { order: 0; }
+    .feature-row.reverse .visual-side { order: 1; }
+    .container { gap: 4rem; }
+  }
+</style>

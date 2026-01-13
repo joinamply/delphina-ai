@@ -1,0 +1,155 @@
+---
+const integrations = [
+  "Snowflake", "Databricks", "BigQuery", "AWS", "Azure", "dbt"
+];
+---
+
+<section class="integrations">
+  <div class="container">
+    <div class="text-content">
+      <span class="tag">Integrations</span>
+      <h2>Expand your reach</h2>
+      <p>Works where your data lives. Connect to your existing stack in minutes.</p>
+      
+      <div class="integration-grid">
+        {integrations.map(tech => (
+          <div class="tech-badge">{tech}</div>
+        ))}
+      </div>
+    </div>
+    
+    <div class="visual-content">
+      <div class="cubes-cluster">
+        <div class="cube c1"></div>
+        <div class="cube c2"></div>
+        <div class="cube c3"></div>
+        <div class="cube c-main"></div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="bottom-bar">
+    <h3>Works Where Your Data Lives <span class="arrow">→</span></h3>
+    <div class="logo-strip">
+       <!-- Reusing icons text for demo -->
+       <span>AWS</span><span>GCP</span><span>AZURE</span><span>SNOWFLAKE</span><span>DATABRICKS</span>
+    </div>
+  </div>
+</section>
+
+<style>
+  .integrations {
+    background: var(--color-mint);
+    color: var(--color-text-dark);
+    padding: var(--spacing-section) 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-lg);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    min-height: 400px;
+  }
+
+  .tag {
+    color: var(--color-accent);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    display: block;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  h2 {
+    /* Removed Serif */
+    font-size: 3rem;
+    margin-bottom: var(--spacing-md);
+    font-weight: 700;
+  }
+
+  p {
+    font-size: 1.2rem;
+    max-width: 400px;
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .integration-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .tech-badge {
+    background: rgba(255,255,255,0.5);
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
+    font-weight: 600;
+    border: 1px solid rgba(0,0,0,0.05);
+  }
+
+  /* Visual */
+  .visual-content {
+    display: flex;
+    justify-content: center;
+    perspective: 1000px;
+  }
+
+  .cubes-cluster {
+    width: 200px;
+    height: 200px;
+    position: relative;
+    transform-style: preserve-3d;
+    transform: rotateX(-20deg) rotateY(30deg);
+  }
+
+  .cube {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background: #2a1b3d;
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+
+  .c-main {
+    top: 50%; left: 50%;
+    width: 80px; height: 120px;
+    transform: translate(-50%, -50%) translateZ(40px);
+    background: linear-gradient(135deg, var(--color-mint), #fff);
+    border-color: #000;
+  }
+
+  .c1 { top: 0; left: 0; transform: translateZ(0); }
+  .c2 { bottom: 0; right: 0; transform: translateZ(0); }
+  .c3 { top: 20px; right: -20px; transform: translateZ(-40px); }
+
+  /* Bottom Bar */
+  .bottom-bar {
+    margin-top: var(--spacing-xl);
+    border-top: 1px solid rgba(0,0,0,0.1);
+    padding-top: var(--spacing-lg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-md);
+  }
+
+  .logo-strip {
+    display: flex;
+    gap: 3rem;
+    font-weight: 700;
+    opacity: 0.5;
+    font-size: 1.5rem;
+  }
+
+  @media (max-width: 768px) {
+    .container { grid-template-columns: 1fr; }
+    .visual-content { margin-top: 3rem; }
+    .logo-strip { flex-wrap: wrap; justify-content: center; gap: 1rem; }
+  }
+</style>

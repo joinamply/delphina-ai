@@ -1,0 +1,72 @@
+---
+const logos = [
+  "Microsoft", "Google", "Amazon", "Netflix", "Uber", "Airbnb", "Spotify",
+  "Microsoft", "Google", "Amazon", "Netflix", "Uber", "Airbnb", "Spotify" 
+];
+---
+
+<section class="logos-section">
+  <div class="marquee-container">
+    <p class="trusted-by">Trusted by forward-thinking data teams</p>
+    <div class="marquee">
+      <div class="track">
+        {logos.map((logo) => (
+          <div class="logo-item">{logo}</div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .logos-section {
+    background: var(--color-bg-dark);
+    padding: var(--spacing-lg) 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .trusted-by {
+    text-align: center;
+    color: var(--color-text-secondary);
+    font-size: 0.875rem;
+    margin-bottom: var(--spacing-md);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .marquee-container {
+    overflow: hidden;
+  }
+
+  .marquee {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    white-space: nowrap;
+  }
+
+  .track {
+    display: inline-block;
+    animation: scroll 20s linear infinite;
+  }
+
+  .logo-item {
+    display: inline-block;
+    margin: 0 var(--spacing-xl);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.3);
+    transition: color 0.3s ease;
+    cursor: default;
+  }
+
+  .logo-item:hover {
+    color: var(--color-text-primary);
+  }
+
+  @keyframes scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+</style>

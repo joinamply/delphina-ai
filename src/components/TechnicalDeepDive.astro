@@ -1,0 +1,302 @@
+---
+const useCases = [
+  'Marketing & Sales',
+  'Personalization',
+  'Pricing and Risk',
+  'Fraud',
+  'Manufacturing',
+  'Business Operations'
+];
+
+const caseStudy = {
+  company: 'Quizlet',
+  metrics: [
+    { value: '5%', label: 'AUC lift' },
+    { value: '2%', label: 'conversion increase' }
+  ]
+};
+---
+
+<section class="technical-deep-dive">
+  <div class="container">
+    <h2>Real Results On Your Most Important Problems</h2>
+    
+    <div class="content-grid">
+      <div class="use-cases-sidebar">
+        <h3>Popular Use-Cases</h3>
+        <div class="tabs">
+          {useCases.map((useCase, index) => (
+            <div class={`tab ${index === 0 ? 'active' : ''}`}>
+              {useCase}
+            </div>
+          ))}
+        </div>
+      </div>
+      
+      <div class="visual-display">
+        <div class="cube-stack">
+          {[...Array(12)].map((_, i) => (
+            <div class={`stack-cube cube-${i}`}></div>
+          ))}
+          <div class="highlight-cube"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="case-study-section">
+      <div class="case-study-header">
+        <h3>Hard numbers, not hype</h3>
+        <div class="company-badge">{caseStudy.company}</div>
+      </div>
+      
+      <div class="metrics-grid">
+        {caseStudy.metrics.map(metric => (
+          <div class="metric-card">
+            <div class="value">{metric.value}</div>
+            <div class="label">{metric.label}</div>
+          </div>
+        ))}
+      </div>
+      
+      <div class="wave-visual">
+        <svg viewBox="0 0 400 100" preserveAspectRatio="none">
+          <path d="M0,50 Q100,20 200,50 T400,50" 
+                fill="none" 
+                stroke="rgba(108, 93, 211, 0.3)" 
+                stroke-width="2" />
+          <path d="M0,50 Q100,20 200,50 T400,50" 
+                fill="none" 
+                stroke="rgba(166, 244, 205, 0.6)" 
+                stroke-width="3" 
+                class="wave-line" />
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Stack cubes animation
+  gsap.from(".stack-cube", {
+    y: -300,
+    opacity: 0,
+    stagger: 0.05,
+    duration: 1.2,
+    ease: "bounce.out",
+    scrollTrigger: {
+      trigger: ".cube-stack",
+      start: "top 80%"
+    }
+  });
+
+  // Highlight cube rotation
+  gsap.to(".highlight-cube", {
+    rotateY: 360,
+    duration: 8,
+    repeat: -1,
+    ease: "none"
+  });
+
+  // Wave animation
+  gsap.to(".wave-line", {
+    strokeDashoffset: -100,
+    duration: 3,
+    repeat: -1,
+    ease: "none"
+  });
+</script>
+
+<style>
+  .technical-deep-dive {
+    background: var(--color-bg-dark);
+    color: white;
+    padding: var(--spacing-section) 0;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-lg);
+  }
+
+  h2 {
+    font-size: 3rem;
+    margin-bottom: var(--spacing-xl);
+    font-weight: 700;
+    max-width: 700px;
+  }
+
+  .content-grid {
+    display: grid;
+    grid-template-columns: 350px 1fr;
+    gap: var(--spacing-xl);
+    margin-bottom: calc(var(--spacing-section) / 2);
+  }
+
+  .use-cases-sidebar h3 {
+    font-size: 1.2rem;
+    margin-bottom: var(--spacing-md);
+    color: var(--color-mint);
+  }
+
+  .tabs {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .tab {
+    padding: 1rem 1.5rem;
+    cursor: pointer;
+    font-size: 1.05rem;
+    color: var(--color-text-secondary);
+    transition: all 0.2s ease;
+    border-left: 3px solid transparent;
+    background: rgba(255, 255, 255, 0.02);
+  }
+
+  .tab:hover,
+  .tab.active {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.05);
+    border-left-color: var(--color-mint);
+  }
+
+  /* 3D Cube Stack */
+  .visual-display {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px;
+    perspective: 1500px;
+  }
+
+  .cube-stack {
+    position: relative;
+    width: 300px;
+    height: 400px;
+    transform-style: preserve-3d;
+    transform: rotateX(-20deg) rotateY(25deg);
+  }
+
+  .stack-cube {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    border: 1px solid rgba(108, 93, 211, 0.3);
+    background: rgba(10, 2, 22, 0.8);
+  }
+
+  .stack-cube:nth-child(1) { transform: translate3d(0, 0, 0); }
+  .stack-cube:nth-child(2) { transform: translate3d(70px, 0, 0); }
+  .stack-cube:nth-child(3) { transform: translate3d(140px, 0, 0); }
+  .stack-cube:nth-child(4) { transform: translate3d(0, 70px, 0); }
+  .stack-cube:nth-child(5) { transform: translate3d(70px, 70px, 0); }
+  .stack-cube:nth-child(6) { transform: translate3d(140px, 70px, 0); }
+  .stack-cube:nth-child(7) { transform: translate3d(35px, -70px, 60px); }
+  .stack-cube:nth-child(8) { transform: translate3d(105px, -70px, 60px); }
+  .stack-cube:nth-child(9) { transform: translate3d(35px, 0, 60px); }
+  .stack-cube:nth-child(10) { transform: translate3d(105px, 0, 60px); }
+
+  .highlight-cube {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--color-accent) 0%, #9775FA 100%);
+    transform: translate3d(70px, -140px, 120px);
+    box-shadow: 0 0 30px rgba(108, 93, 211, 0.6);
+  }
+
+  /* Case Study Section */
+  .case-study-section {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: var(--spacing-xl);
+    margin-top: var(--spacing-xl);
+  }
+
+  .case-study-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .case-study-header h3 {
+    font-size: 1.8rem;
+    font-weight: 700;
+  }
+
+  .company-badge {
+    background: rgba(166, 244, 205, 0.1);
+    color: var(--color-mint);
+    padding: 0.5rem 1.5rem;
+    border-radius: 2rem;
+    font-weight: 600;
+  }
+
+  .metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .metric-card {
+    background: rgba(255, 255, 255, 0.03);
+    padding: 2rem;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .metric-card .value {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--color-mint);
+    margin-bottom: 0.5rem;
+  }
+
+  .metric-card .label {
+    font-size: 1rem;
+    color: var(--color-text-secondary);
+  }
+
+  .wave-visual {
+    width: 100%;
+    height: 100px;
+    margin-top: var(--spacing-lg);
+  }
+
+  .wave-visual svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .wave-line {
+    stroke-dasharray: 100;
+  }
+
+  @media (max-width: 768px) {
+    .content-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .use-cases-sidebar {
+      order: 2;
+    }
+
+    h2 {
+      font-size: 2rem;
+    }
+
+    .case-study-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+  }
+</style>

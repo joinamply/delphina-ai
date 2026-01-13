@@ -1,0 +1,81 @@
+---
+---
+<nav class="nav glass-dark">
+  <div class="nav-content">
+    <div class="logo">
+      <a href="/">DELPHINA</a>
+    </div>
+    <div class="links">
+      <a href="#features">Features</a>
+      <a href="#how-it-works">How it Works</a>
+      <a href="#testimonials">Testimonials</a>
+    </div>
+    <div class="cta">
+      <a href="#" class="btn-primary">Get Started</a>
+    </div>
+  </div>
+</nav>
+
+<style>
+  .nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: var(--spacing-md) 0;
+    transition: all 0.3s ease;
+  }
+
+  .nav-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-lg);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .logo a {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: var(--color-text-primary);
+  }
+
+  .links {
+    display: flex;
+    gap: var(--spacing-lg);
+  }
+
+  .links a {
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+    transition: color 0.2s ease;
+  }
+
+  .links a:hover {
+    color: var(--color-text-primary);
+  }
+
+  .btn-primary {
+    background: var(--color-accent);
+    color: white;
+    padding: 0.5rem 1.5rem;
+    border-radius: 2rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px var(--color-accent-glow);
+  }
+
+  @media (max-width: 768px) {
+    .links {
+      display: none;
+    }
+  }
+</style>

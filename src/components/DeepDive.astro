@@ -1,0 +1,288 @@
+---
+const menuItems = [
+  "Models & Metrics",
+  "Production",
+  "Enterprise Tiers",
+  "Privacy",
+  "Monitoring",
+  "Explainability"
+];
+---
+
+<section class="deep-dive">
+  <div class="container">
+    <span class="tag">Deep Dive</span>
+    <h2>Use Gen-AI for your Most Important Problems</h2>
+    
+    <div class="content-wrapper">
+      <div class="sidebar">
+        {menuItems.map((item, index) => (
+          <div class={`menu-item ${index === 0 ? 'active' : ''}`}>
+            {item}
+          </div>
+        ))}
+      </div>
+      
+      <div class="visual-display">
+        <!-- 3D Stacking Blocks Visual -->
+        <div class="blocks-scene">
+          <div class="block-stack">
+            <div class="block b1"></div>
+            <div class="block b2"></div>
+            <div class="block b3"></div>
+            <div class="block b4"></div>
+            <div class="cube-accent"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Manager Stats Subsection -->
+    <div class="stats-section">
+      <div class="stats-header">
+        <span class="tag-outline">Managers</span>
+        <h3>What matters to managers</h3>
+        <p>Efficiency that translates to the bottom line.</p>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="number">50%</div>
+          <div class="label">faster time to delivery</div>
+          <div class="bar-chart">
+            <div class="bar-bg"><div class="bar-fill w-50"></div></div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="number">20:1</div>
+          <div class="label">ROI on data infrastructure</div>
+          <div class="bar-chart">
+             <div class="bar-bg"><div class="bar-fill w-80"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Stacking Animation
+  gsap.from(".block", {
+    y: -200,
+    opacity: 0,
+    stagger: 0.1,
+    duration: 1.2,
+    ease: "bounce.out",
+    scrollTrigger: {
+      trigger: ".blocks-scene",
+      start: "top 70%"
+    }
+  });
+
+  gsap.to(".cube-accent", {
+    rotation: 360,
+    duration: 10,
+    repeat: -1,
+    ease: "none"
+  });
+</script>
+
+<style>
+  .deep-dive {
+    background: var(--color-bg-dark);
+    color: white;
+    padding: var(--spacing-section) 0;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-lg);
+  }
+
+  .tag {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    display: inline-block;
+    margin-bottom: var(--spacing-md);
+  }
+
+  h2 {
+    /* Removed Serif */
+    font-size: 3rem;
+    margin-bottom: var(--spacing-xl);
+    max-width: 600px;
+    font-weight: 700;
+  }
+
+  .content-wrapper {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: var(--spacing-xl);
+    margin-bottom: var(--spacing-section);
+  }
+
+  .sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    border-left: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .menu-item {
+    padding: 1rem 1.5rem;
+    cursor: pointer;
+    font-size: 1.1rem;
+    color: var(--color-text-secondary);
+    transition: all 0.2s ease;
+    border-left: 2px solid transparent;
+    margin-left: -1px;
+  }
+
+  .menu-item:hover, .menu-item.active {
+    color: #fff;
+    background: linear-gradient(90deg, rgba(255,255,255,0.05) 0%, transparent 100%);
+    border-left-color: #fff;
+  }
+
+  .visual-display {
+    height: 400px;
+    background: radial-gradient(circle at center, rgba(108, 93, 211, 0.1) 0%, transparent 70%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    perspective: 1000px;
+  }
+
+  /* 3D Stacking Blocks */
+  .blocks-scene {
+    width: 200px;
+    height: 300px;
+    position: relative;
+    transform: rotateX(60deg) rotateZ(45deg) scale(0.8);
+    transform-style: preserve-3d;
+  }
+
+  .block-stack {
+    position: relative;
+    transform-style: preserve-3d;
+  }
+
+  .block {
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
+    border: 1px solid rgba(255,255,255,0.2);
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  }
+
+  .block::before {
+    content: ''; position: absolute; width: 100%; height: 20px;
+    bottom: -20px; left: 0; background: #0a0a0a; transform-origin: top; transform: rotateX(-90deg);
+  }
+  .block::after {
+    content: ''; position: absolute; width: 20px; height: 100%;
+    top: 0; right: -20px; background: #151515; transform-origin: left; transform: rotateY(90deg);
+  }
+
+  .b1 { transform: translateZ(0); }
+  .b2 { transform: translateZ(40px) translate(20px, 20px); }
+  .b3 { transform: translateZ(80px) translate(-10px, 10px); }
+  .b4 { transform: translateZ(120px); }
+
+  .cube-accent {
+    width: 40px; height: 40px;
+    position: absolute;
+    transform: translateZ(180px) translate(30px, 30px);
+    background: var(--color-accent);
+    box-shadow: 0 0 20px var(--color-accent-glow);
+  }
+
+  /* Stats Section */
+  .stats-section {
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: var(--spacing-lg);
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: var(--spacing-xl);
+  }
+  
+  .tag-outline {
+    border: 1px solid var(--color-accent);
+    color: var(--color-accent);
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    display: inline-block;
+    margin-bottom: var(--spacing-sm);
+  }
+  
+  .stats-header h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .stats-header p {
+    color: var(--color-text-secondary);
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-lg);
+  }
+
+  .stat-card {
+    background: rgba(255,255,255,0.03);
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  .label {
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+    margin-bottom: 1rem;
+  }
+
+  .bar-bg {
+    width: 100%;
+    height: 4px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 2px;
+  }
+
+  .bar-fill {
+    height: 100%;
+    background: var(--color-mint);
+    border-radius: 2px;
+    box-shadow: 0 0 10px rgba(211, 243, 238, 0.5);
+  }
+
+  .w-50 { width: 50%; }
+  .w-80 { width: 80%; }
+
+  @media (max-width: 768px) {
+    .content-wrapper { grid-template-columns: 1fr; }
+    .sidebar { display: flex; flex-direction: row; overflow-x: auto; border-left: none; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 1rem; }
+    .menu-item { white-space: nowrap; border-left: none; border-bottom: 2px solid transparent; }
+    .menu-item:hover, .menu-item.active { border-left-color: transparent; border-bottom-color: #fff; background: none; }
+    .stats-section { grid-template-columns: 1fr; }
+  }
+</style>

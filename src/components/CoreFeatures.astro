@@ -1,0 +1,295 @@
+---
+const features = [
+  {
+    tag: 'NEW MODELS',
+    tagColor: '#FF6B6B',
+    title: 'Prototype new ideas in minutes',
+    description: 'Automated exploratory data analysis and feature ideation accelerates experimentation.',
+    visual: 'terminal'
+  },
+  {
+    tag: 'EXISTING MODELS',
+    tagColor: '#51CF66',
+    title: 'Make good models legendary',
+    description: 'Deep feature engineering and tuning lift accuracy by 5-20%',
+    visual: 'line-graph'
+  },
+  {
+    tag: 'DRIFT & DECAY',
+    tagColor: '#9775FA',
+    title: 'Your models, evergreen',
+    description: 'Continuous monitoring detects drift and triggers automatic retraining.',
+    visual: 'drift-graph'
+  },
+  {
+    tag: 'PRODUCTIONIZE',
+    tagColor: '#339AF0',
+    title: 'Deploy instantly',
+    description: 'From notebook to production in one click. No DevOps required.',
+    visual: 'deployment'
+  }
+];
+---
+
+<section class="core-features">
+  <div class="container">
+    {features.map((feature, index) => (
+      <div class="feature-section">
+        <div class="content">
+          <span class="tag" style={`background: ${feature.tagColor}15; color: ${feature.tagColor};`}>
+            {feature.tag}
+          </span>
+          <h2>{feature.title}</h2>
+          <p>{feature.description}</p>
+        </div>
+        
+        <div class="visual">
+          {feature.visual === 'terminal' && (
+            <div class="terminal-box">
+              <div class="terminal-header">
+                <div class="dots">
+                  <span></span><span></span><span></span>
+                </div>
+              </div>
+              <div class="terminal-body">
+                <div class="line">$ delphina analyze --dataset customer_data</div>
+                <div class="line output">✓ EDA complete: 15 correlations found</div>
+                <div class="line output">✓ Feature candidates: 23 generated</div>
+                <div class="line output">✓ Model ready for training</div>
+              </div>
+            </div>
+          )}
+          
+          {feature.visual === 'line-graph' && (
+            <div class="graph-box">
+              <div class="graph-title">Model Performance</div>
+              <svg viewBox="0 0 200 120" class="performance-graph">
+                <defs>
+                  <linearGradient id="perf-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" style="stop-color:#51CF66;stop-opacity:0.3" />
+                    <stop offset="100%" style="stop-color:#51CF66;stop-opacity:0" />
+                  </linearGradient>
+                </defs>
+                <path d="M10,100 L40,90 L70,85 L100,60 L130,55 L160,40 L190,30" 
+                      fill="none" stroke="#51CF66" stroke-width="3" />
+                <path d="M10,100 L40,90 L70,85 L100,60 L130,55 L160,40 L190,30 L190,120 L10,120 Z" 
+                      fill="url(#perf-gradient)" />
+                <text x="100" y="15" text-anchor="middle" fill="#51CF66" font-size="12" font-weight="600">
+                  +18% Accuracy
+                </text>
+              </svg>
+            </div>
+          )}
+          
+          {feature.visual === 'drift-graph' && (
+            <div class="graph-box">
+              <div class="graph-title">Model Drift Detection</div>
+              <svg viewBox="0 0 200 120" class="drift-graph">
+                <path d="M10,60 Q50,55 100,90 T190,95" 
+                      fill="none" stroke="#e0e0e0" stroke-width="2" stroke-dasharray="5,5" />
+                <path d="M10,60 Q50,55 100,40 T190,30" 
+                      fill="none" stroke="#9775FA" stroke-width="3" />
+                <circle cx="140" cy="35" r="5" fill="#9775FA" class="pulse-dot" />
+                <text x="100" y="15" text-anchor="middle" fill="#9775FA" font-size="11" font-weight="600">
+                  Drift Detected → Rebuilt
+                </text>
+              </svg>
+            </div>
+          )}
+          
+          {feature.visual === 'deployment' && (
+            <div class="deployment-diagram">
+              <div class="source-box">Feature Store</div>
+              <div class="arrow">→</div>
+              <div class="center-cube"></div>
+              <div class="arrow">→</div>
+              <div class="dest-box">Production</div>
+            </div>
+          )}
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .core-features {
+    background: var(--color-bg-light);
+    padding: var(--spacing-section) 0;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-lg);
+    display: flex;
+    flex-direction: column;
+    gap: 10rem;
+  }
+
+  .feature-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-xl);
+    align-items: center;
+  }
+
+  .content .tag {
+    display: inline-block;
+    padding: 0.4rem 1rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .content h2 {
+    font-size: 2.5rem;
+    color: var(--color-text-dark);
+    margin-bottom: var(--spacing-md);
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  .content p {
+    font-size: 1.1rem;
+    color: #666;
+    line-height: 1.6;
+  }
+
+  .visual {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 300px;
+  }
+
+  /* Terminal Visual */
+  .terminal-box {
+    background: #1e1e1e;
+    border-radius: 8px;
+    overflow: hidden;
+    width: 100%;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+  }
+
+  .terminal-header {
+    background: #2d2d2d;
+    padding: 0.75rem;
+    border-bottom: 1px solid #3d3d3d;
+  }
+
+  .dots {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .dots span {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #666;
+  }
+
+  .dots span:nth-child(1) { background: #ff5f56; }
+  .dots span:nth-child(2) { background: #ffbd2e; }
+  .dots span:nth-child(3) { background: #27c93f; }
+
+  .terminal-body {
+    padding: 1.5rem;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+  }
+
+  .terminal-body .line {
+    color: #51CF66;
+    margin-bottom: 0.5rem;
+  }
+
+  .terminal-body .line.output {
+    color: #999;
+    margin-left: 1rem;
+  }
+
+  /* Graph Visuals */
+  .graph-box {
+    background: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    width: 100%;
+  }
+
+  .graph-title {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 1rem;
+    font-weight: 600;
+  }
+
+  .performance-graph,
+  .drift-graph {
+    width: 100%;
+    height: auto;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.2); }
+  }
+
+  .pulse-dot {
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  /* Deployment Diagram */
+  .deployment-diagram {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    width: 100%;
+  }
+
+  .source-box,
+  .dest-box {
+    background: white;
+    border: 2px solid #339AF0;
+    border-radius: 8px;
+    padding: 1.5rem;
+    font-weight: 600;
+    color: #339AF0;
+    flex: 1;
+    text-align: center;
+  }
+
+  .center-cube {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #339AF0 0%, #1971C2 100%);
+    transform: rotate(45deg);
+    flex-shrink: 0;
+  }
+
+  .arrow {
+    font-size: 2rem;
+    color: #339AF0;
+    font-weight: 300;
+  }
+
+  @media (max-width: 768px) {
+    .feature-section {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+
+    .content h2 {
+      font-size: 2rem;
+    }
+
+    .container {
+      gap: 6rem;
+    }
+  }
+</style>

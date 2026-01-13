@@ -1,0 +1,87 @@
+---
+const logos = [
+  { name: 'Medely', alt: 'Medely logo' },
+  { name: 'Opendoor', alt: 'Opendoor logo' },
+  { name: 'Quizlet', alt: 'Quizlet logo' },
+  { name: 'Just', alt: 'Just logo' }
+];
+---
+
+<section class="trusted-by">
+  <div class="container">
+    <h2>Accelerating World-Class Data Teams</h2>
+    <div class="logos-grid">
+      {logos.map(logo => (
+        <div class="logo-item">{logo.name}</div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .trusted-by {
+    background: var(--color-bg-light);
+    padding: var(--spacing-section) 0;
+    position: relative;
+  }
+
+  /* Grid pattern background */
+  .trusted-by::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+      linear-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-lg);
+    position: relative;
+    z-index: 1;
+  }
+
+  h2 {
+    font-size: 2.5rem;
+    color: var(--color-text-dark);
+    margin-bottom: var(--spacing-xl);
+    font-weight: 700;
+  }
+
+  .logos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: var(--spacing-lg);
+    align-items: center;
+  }
+
+  .logo-item {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #999;
+    text-align: center;
+    opacity: 0.6;
+    transition: opacity 0.2s;
+  }
+
+  .logo-item:hover {
+    opacity: 1;
+  }
+
+  @media (max-width: 768px) {
+    h2 {
+      font-size: 2rem;
+    }
+    
+    .logos-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

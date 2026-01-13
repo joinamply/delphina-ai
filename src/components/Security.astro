@@ -1,0 +1,184 @@
+---
+const securityFeatures = [
+  {
+    title: 'SOC 2 Type II',
+    description: 'Independently audited security controls',
+    icon: '✓'
+  },
+  {
+    title: 'VPC Deployment',
+    description: 'Deploy in your own private cloud',
+    icon: '🔒'
+  },
+  {
+    title: 'Data Privacy',
+    description: 'Your data never leaves your environment',
+    icon: '🛡️'
+  },
+  {
+    title: 'Encryption',
+    description: 'End-to-end encryption at rest and in transit',
+    icon: '🔐'
+  }
+];
+---
+
+<section class="security">
+  <div class="gradient-bg"></div>
+  
+  <div class="container">
+    <h2>Delphina checks all your security boxes</h2>
+    
+    <div class="security-grid">
+      {securityFeatures.map(feature => (
+        <div class="security-card">
+          <div class="icon">{feature.icon}</div>
+          <h3>{feature.title}</h3>
+          <p>{feature.description}</p>
+        </div>
+      ))}
+    </div>
+
+    <div class="visual-section">
+      <div class="security-cube">
+        <div class="shield">🛡️</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  
+  gsap.registerPlugin(ScrollTrigger);
+
+  gsap.from(".security-card", {
+    scale: 0.9,
+    opacity: 0,
+    stagger: 0.1,
+    duration: 0.8,
+    scrollTrigger: {
+      trigger: ".security-grid",
+      start: "top 80%"
+    }
+  });
+
+  gsap.to(".security-cube", {
+    rotateY: 360,
+    duration: 15,
+    repeat: -1,
+    ease: "none"
+  });
+</script>
+
+<style>
+  .security {
+    position: relative;
+    padding: var(--spacing-section) 0;
+    overflow: hidden;
+  }
+
+  .gradient-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, 
+      var(--color-mint) 0%, 
+      #E0C3FC 100%
+    );
+    z-index: -1;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-lg);
+  }
+
+  h2 {
+    font-size: 3rem;
+    color: var(--color-text-dark);
+    margin-bottom: var(--spacing-xl);
+    font-weight: 700;
+    text-align: center;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .security-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-lg);
+    margin-bottom: calc(var(--spacing-section) / 2);
+  }
+
+  .security-card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 2rem;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    text-align: center;
+    transition: transform 0.2s;
+  }
+
+  .security-card:hover {
+    transform: translateY(-5px);
+  }
+
+  .security-card .icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .security-card h3 {
+    font-size: 1.3rem;
+    color: var(--color-text-dark);
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+  }
+
+  .security-card p {
+    color: #666;
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  .visual-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 200px;
+    perspective: 1000px;
+  }
+
+  .security-cube {
+    width: 120px;
+    height: 120px;
+    background: linear-gradient(135deg, #6C5DD3 0%, #9775FA 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    box-shadow: 0 20px 60px rgba(108, 93, 211, 0.3);
+    transform-style: preserve-3d;
+  }
+
+  .shield {
+    font-size: 3rem;
+  }
+
+  @media (max-width: 768px) {
+    h2 {
+      font-size: 2rem;
+    }
+
+    .security-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

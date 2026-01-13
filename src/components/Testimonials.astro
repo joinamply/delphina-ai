@@ -1,0 +1,141 @@
+---
+const testimonials = [
+  {
+    company: 'Medely',
+    quote: 'Delphina helped us ship production ML 3x faster than our previous workflow.',
+    author: 'Sarah Chen',
+    role: 'Head of Data Science'
+  },
+  {
+    company: 'Just',
+    quote: 'The feature engineering capabilities are unmatched. We saw immediate ROI.',
+    author: 'Michael Torres',
+    role: 'VP of Engineering'
+  },
+  {
+    company: 'Quizlet',
+    quote: 'Finally, a platform that makes our data scientists more productive, not just busy.',
+    author: 'Emily Rodriguez',
+    role: 'Chief Data Officer'
+  }
+];
+---
+
+<section class="testimonials">
+  <div class="container">
+    <h2>What customers say about us</h2>
+    
+    <div class="testimonials-grid">
+      {testimonials.map(testimonial => (
+        <div class="testimonial-card">
+          <div class="company-badge">{testimonial.company}</div>
+          <blockquote>"{testimonial.quote}"</blockquote>
+          <div class="author-info">
+            <div class="author-name">{testimonial.author}</div>
+            <div class="author-role">{testimonial.role}</div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  
+  gsap.registerPlugin(ScrollTrigger);
+
+  gsap.from(".testimonial-card", {
+    y: 50,
+    opacity: 0,
+    stagger: 0.15,
+    duration: 1,
+    scrollTrigger: {
+      trigger: ".testimonials-grid",
+      start: "top 80%"
+    }
+  });
+</script>
+
+<style>
+  .testimonials {
+    background: var(--color-bg-dark);
+    color: white;
+    padding: var(--spacing-section) 0;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-lg);
+  }
+
+  h2 {
+    font-size: 2.5rem;
+    margin-bottom: var(--spacing-xl);
+    font-weight: 700;
+    text-align: center;
+    color: var(--color-mint);
+  }
+
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: var(--spacing-lg);
+  }
+
+  .testimonial-card {
+    background: rgba(255, 255, 255, 0.03);
+    padding: 2rem;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .company-badge {
+    background: rgba(166, 244, 205, 0.1);
+    color: var(--color-mint);
+    padding: 0.4rem 1rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    display: inline-block;
+    align-self: flex-start;
+  }
+
+  blockquote {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: white;
+    margin: 0;
+    font-style: italic;
+  }
+
+  .author-info {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 1rem;
+  }
+
+  .author-name {
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+  }
+
+  .author-role {
+    color: var(--color-text-secondary);
+    font-size: 0.9rem;
+  }
+
+  @media (max-width: 768px) {
+    h2 {
+      font-size: 2rem;
+    }
+
+    .testimonials-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

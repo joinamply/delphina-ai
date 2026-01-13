@@ -1,0 +1,273 @@
+---
+---
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="text-col">
+      <h1 class="hero-title">
+        <span class="text-gold">AI Agent</span>
+        <span class="text-white">for Data Science</span>
+      </h1>
+      <p class="hero-subtitle">
+        Turn Raw Data into Real Impact, in Minutes Not Months
+      </p>
+      <div class="hero-cta">
+        <a href="#" class="btn-primary">Watch video</a>
+        <a href="#" class="btn-secondary">Book a demo</a>
+      </div>
+    </div>
+    
+    <div class="visual-col">
+      <div class="wireframe-cube">
+        <div class="cube-face front"></div>
+        <div class="cube-face back"></div>
+        <div class="cube-face left"></div>
+        <div class="cube-face right"></div>
+        <div class="cube-face top"></div>
+        <div class="cube-face bottom"></div>
+        <div class="particles">
+          {[...Array(20)].map(() => (
+            <div class="particle"></div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { gsap } from "gsap";
+
+  // Hero title animation
+  gsap.from(".hero-title span", {
+    y: 100,
+    opacity: 0,
+    duration: 1.2,
+    stagger: 0.15,
+    ease: "power3.out"
+  });
+
+  gsap.from(".hero-subtitle", {
+    y: 20,
+    opacity: 0,
+    duration: 0.8,
+    delay: 0.5
+  });
+
+  gsap.from(".hero-cta a", {
+    y: 20,
+    opacity: 0,
+    duration: 0.8,
+    stagger: 0.1,
+    delay: 0.7
+  });
+
+  // Wireframe cube rotation
+  gsap.to(".wireframe-cube", {
+    rotateY: 360,
+    rotateX: 360,
+    duration: 20,
+    repeat: -1,
+    ease: "none"
+  });
+
+  // Particles float animation
+  document.querySelectorAll('.particle').forEach((particle, i) => {
+    gsap.to(particle, {
+      y: `random(-100, 100)`,
+      x: `random(-100, 100)`,
+      duration: `random(3, 6)`,
+      repeat: -1,
+      yoyo: true,
+      ease: "sine.inOut",
+      delay: i * 0.1
+    });
+  });
+</script>
+
+<style>
+  .hero {
+    min-height: 90vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    padding-top: calc(var(--spacing-section) + 60px);
+  }
+
+  .hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--color-bg-dark);
+    background-image: 
+      radial-gradient(circle at 20% 50%, rgba(108, 93, 211, 0.15) 0%, transparent 25%),
+      radial-gradient(circle at 80% 30%, rgba(166, 244, 205, 0.05) 0%, transparent 25%);
+    z-index: -1;
+  }
+  
+  /* Grid pattern */
+  .hero-bg::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+      linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+
+  .hero-content {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-lg);
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: var(--spacing-xl);
+    align-items: center;
+  }
+
+  .hero-title {
+    font-size: clamp(3.5rem, 6vw, 5.5rem);
+    line-height: 1.1;
+    margin-bottom: var(--spacing-md);
+    display: flex;
+    flex-direction: column;
+    font-weight: 700;
+  }
+
+  .text-gold {
+    color: var(--color-gold);
+  }
+
+  .text-white {
+    color: #FFFFFF;
+  }
+
+  .hero-subtitle {
+    font-size: clamp(1.1rem, 2vw, 1.4rem);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--spacing-lg);
+    max-width: 540px;
+    font-weight: 300;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: var(--spacing-md);
+    align-items: center;
+  }
+
+  .btn-primary {
+    background: var(--color-seafoam);
+    color: var(--color-purple-dark);
+    padding: 1rem 2.5rem;
+    border-radius: 2rem;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.2s ease;
+  }
+  
+  .btn-primary:hover {
+    box-shadow: 0 0 20px rgba(166, 244, 205, 0.4);
+    transform: translateY(-2px);
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: white;
+    padding: 1rem 2.5rem;
+    border-radius: 2rem;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.2s ease;
+  }
+
+  .btn-secondary:hover {
+    border-color: white;
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  /* 3D Wireframe Cube */
+  .visual-col {
+    height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    perspective: 1200px;
+  }
+
+  .wireframe-cube {
+    width: 300px;
+    height: 300px;
+    position: relative;
+    transform-style: preserve-3d;
+  }
+
+  .cube-face {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border: 2px solid rgba(108, 93, 211, 0.4);
+    background: rgba(108, 93, 211, 0.05);
+  }
+
+  .front  { transform: translateZ(150px); }
+  .back   { transform: translateZ(-150px) rotateY(180deg); }
+  .left   { transform: rotateY(-90deg) translateZ(150px); }
+  .right  { transform: rotateY(90deg) translateZ(150px); }
+  .top    { transform: rotateX(90deg) translateZ(150px); }
+  .bottom { transform: rotateX(-90deg) translateZ(150px); }
+
+  .particles {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+  }
+
+  .particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: rgba(166, 244, 205, 0.8);
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(166, 244, 205, 0.6);
+    left: 50%;
+    top: 50%;
+  }
+
+  @media (max-width: 768px) {
+    .hero-content {
+      grid-template-columns: 1fr;
+    }
+
+    .visual-col {
+      height: 400px;
+    }
+
+    .wireframe-cube {
+      width: 200px;
+      height: 200px;
+    }
+
+    .cube-face {
+      width: 200px;
+      height: 200px;
+    }
+
+    .front  { transform: translateZ(100px); }
+    .back   { transform: translateZ(-100px) rotateY(180deg); }
+    .left   { transform: rotateY(-90deg) translateZ(100px); }
+    .right  { transform: rotateY(90deg) translateZ(100px); }
+    .top    { transform: rotateX(90deg) translateZ(100px); }
+    .bottom { transform: rotateX(-90deg) translateZ(100px); }
+  }
+</style>
